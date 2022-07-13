@@ -2,9 +2,20 @@
 const header = document.querySelector("#header")
 console.log("Here's your header:", header)
 
+header.addEventListener('click', function(event) {
+    toggleColor(event.target);
+});
+
+toggleColor(document.querySelector("h1#header"));
 
 /***** Deliverable 2 *****/
 header.style.color = "green"
+
+let additionalLikeCount = 0;
+
+let button = document.querySelector(".like-button");
+button.addEventListener('click', increaseLikes);
+
 
 
 /***** Deliverable 3 *****/
@@ -51,12 +62,39 @@ traveler.animalSightings.forEach(function (animalSightinObject) {
     renderAnimalSightingPost(animalSightinObject)
 })
 
+let lastId = 4;
+
+let form = document.getElementById('new-animal-sighting-form');
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+    // const animalSpecies = document.getElementById("animal-species").value;
+    // const videoLink = document.getElementById("animal-link").value;
+    // const photo = document.getElementById("animal-photo").value;
+    // const description = document.getElementById("sighting-description").value;
+    const newAnimal = {
+        id: ++lastId,
+        travelerId: 1,
+        species: form.species.value,
+        photo: form.photo.value,
+        link: form.link.value,
+        description: form.description.value
+      }
+
+    renderAnimalSightingPost(newAnimal);
+});
+
 /***** Deliverable 5 *****/
 const animalToRemove = document.querySelector("[data-id='3'")
 animalToRemove.remove()
 
 /***** End of Starter Code *****/
 /************************** EVENTS JS MINI CHALLENGE ******************************/
+
+function increaseLikes() {
+    likes.textContent = `${traveler.likes + ++additionalLikeCount} Likes`;
+}
+
+
 
 /***** Deliverable 1 *****/
 function toggleColor(element) {
